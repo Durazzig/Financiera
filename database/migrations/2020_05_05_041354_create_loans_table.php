@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrestamosTable extends Migration
+class CreateLoansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreatePrestamosTable extends Migration
      */
     public function up()
     {
-        Schema::create('prestamos', function (Blueprint $table) {
+        Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cliente');
-            $table->foreign('cliente')->references('id')->on('clientes');
+            $table->unsignedBigInteger('client');
             $table->double('cantidad');
             $table->integer('no_pagos');
             $table->double('cuota');
             $table->double('pago_total');
             $table->date('fecha_ministracion');
             $table->date('fecha_vencimiento');
+            $table->foreign('client')->references('id')->on('clients');
         });
     }
 

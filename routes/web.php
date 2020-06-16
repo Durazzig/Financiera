@@ -20,3 +20,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Rutas Clientes
+Route::get('/clients', 'ClientsController@index')
+    ->name('clients.index');
+Route::get('/clients/new', 'ClientsController@create')
+    ->name('clients.create');
+Route::post('/clients', 'ClientsController@store')
+    ->name('clients.store');
+Route::delete('/clients/{id}', 'ClientsController@destroy')
+    ->name('clients.destroy');
+Route::any('/clients/edit/{id}', 'ClientsController@edit');
+Route::any('/clients/update/{id}', 'ClientsController@update')->name('clients.update');
+
+//Rutas Prestamos
+Route::get('/loans', 'LoansController@index')->name('loans.index');
