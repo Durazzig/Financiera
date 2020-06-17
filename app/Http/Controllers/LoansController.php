@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Loan;
+use App\Client;
 
 class LoansController extends Controller
 {
@@ -13,7 +15,8 @@ class LoansController extends Controller
      */
     public function index()
     {
-        return view('loans.index');
+        $loans = Loan::all();
+        return view('loans.index',compact('loans'));
     }
 
     /**
@@ -23,7 +26,8 @@ class LoansController extends Controller
      */
     public function create()
     {
-        //
+        $clientsData = Client::all();
+        return view('loans.create',compact('clientsData'));
     }
 
     /**

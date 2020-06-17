@@ -19,7 +19,6 @@ class CreateLoansTable extends Migration
             $table->double('cantidad');
             $table->integer('no_pagos');
             $table->double('cuota');
-            $table->double('pago_total');
             $table->date('fecha_ministracion');
             $table->date('fecha_vencimiento');
             $table->foreign('client')->references('id')->on('clients');

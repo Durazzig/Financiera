@@ -35,3 +35,4 @@ Route::any('/clients/update/{id}', 'ClientsController@update')->name('clients.up
 
 //Rutas Prestamos
 Route::get('/loans', 'LoansController@index')->name('loans.index');
+Route::get('/loans/create', 'LoansController@create')->name('loans.create');

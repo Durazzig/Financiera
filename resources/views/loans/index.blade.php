@@ -2,64 +2,94 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-5 mx-auto">
+    <div class="col-md-8 mx-auto">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div>
                         <h3 class="mb-0">Prestamos</h3>
                     </div>
+                    <div>
+                        <a href="{{ route('loans.create') }}" class="btn btn-primary">
+                            {{ __('Nuevo Prestamo')}}
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
-            <form action="">
-                    <div class="form-group form-row">
-                        <div class="col-md-6">
-                            <label for="client">Cliente:</label>
-                            <input class="form-control" type="text" name="client" id="client">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="client">Cantidad:</label>
-                            <input class="form-control" type="text" name="client" id="client">
-                        </div>
-                    </div>
-                    <div class="form-group form-row">
-                        <div class="col-md-6">
-                            <label for="client">Numero de pagos:</label>
-                            <select class="btn-block" name="payments" id="payments">
-                                @for ($i = 1; $i <= 100; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
-                                @endfor
-                            </select>
-                            <!-- <input class="form-control" type="text" name="client" id="client">-->
-                        </div>
-                        <div class="col-md-6">
-                            <label for="client">Cuota:</label>
-                            <input class="form-control" type="text" name="client" id="client">
-                        </div>
-                    </div>
-                    <div class="form-group form-row">
-                        <div class="col-md-6">
-                            <label for="firstDate">Fecha Ministracion:</label>
-                            <input class="form-control" type="date" name="firstDate" id="firstDate">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="client">Fecha Vencimiento:</label>
-                            <input class="form-control" type="date" name="client" id="client">
-                        </div>
-                    </div>
-                <input class="btn btn-success btn-block" type="submit" value="Realizar Prestamo">
-            </form>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ __('Nombre') }}</th>
+                            <th scope="col">{{ __('Cantidad') }}</th>
+                            <th scope="col">{{ __('No Pagos') }}</th>
+                            <th scope="col">{{ __('Cuota') }}</th>
+                            <th scope="col">{{ __('Fecha Ministracion') }}</th>
+                            <th scope="col">{{ __('Fecha Vencimiento') }}</th>
+                            <th scope="col" style="width: 150px">{{ __('Opciones') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($loans as $loan)
+                        <tr>
+                            <td scope="row">{{ $loan->client->name }}</td>
+                            <td scope="row">{{ $loan->cantidad }}</td>
+                            <td scope="row">{{ $loan->no_pagos }}</td>
+                            <td scope="row">{{ $loan->cuota }}</td>
+                            <td scope="row">{{ $loan->fecha_ministracion }}</td>
+                            <td scope="row">{{ $loan->fecha_vencimiento }}</td>
+                            <td>
+                                <a href="{{url('/clients/edit',$client->id)}}" class="btn btn-outline-secondary btn-sm">
+                                    Editar
+                                </a>
+                                <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{ $client->id }}">Borrar</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+@endsection
 
+@section('bottom-js')
 <script>
-    $(document).ready(function(){
-        $('#firstDate').click(function(){
-            alert("Actualizando fecha limite")
+    $('body').on('click', '.btn-delete', function(event) {
+        const id = $(this).data('id');
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'No podrás revertir esta acción',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, borralo!'
+        })
+        .then((result) => {
+            if (result.value) {
+                axios.delete('{{ route('clients.index') }}/' + id)
+                    .then(result => {
+                        Swal.fire({
+                            title: 'Borrado',
+                            text: 'El cliente a sido borrado',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href='{{ route('clients.index') }}';
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Ocurrió un error',
+                            'El cliente no ha podido borrarse.',
+                            'error'
+                        );
+                    });
+
+            }
         });
-    })''
+    });
 </script>
 @endsection
+
