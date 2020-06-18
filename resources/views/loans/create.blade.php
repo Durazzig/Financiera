@@ -13,13 +13,13 @@
             </div>
             <div class="card-body">
             @if(Auth::user())
-            <form action="">
+            <form action="{{route('loans.store')}}">
                     <div class="form-group form-row">
                         <div class="col-md-6">
                             <label for="client">Cliente:</label>
                             <select class="custom-select" name="client" id="client">
                                 @foreach($clientsData as $client)
-                                    <option value="{{$client->name}}">{{$client->name}}</option>
+                                    <option value="{{$client->id}}">{{$client->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -39,8 +39,8 @@
                             <!-- <input class="form-control" type="text" name="client" id="client">-->
                         </div>
                         <div class="col-md-6">
-                            <label for="cuotas">Cuota:</label>
-                            <input class="form-control" type="number" name="cuotas" id="cuotas">
+                            <label for="cuota">Cuota:</label>
+                            <input class="form-control" type="number" name="cuota" id="cuota">
                         </div>
                     </div>
                     <div class="form-group form-row">
@@ -53,7 +53,7 @@
                             <input class="form-control" type="date" name="lastDate" id="lastDate">
                         </div>
                     </div>  
-                <input class="btn btn-success btn-block" type="submit" value="Realizar Prestamo">
+                <input class="btn btn-success btn-block bg-dark" type="submit" value="Realizar Prestamo">
             </form>
             @else
             <strong>Se ha detetectado que no te has logueado -> Por favor inicia sesion</strong>
@@ -71,7 +71,7 @@
                 noCuotas = $(this).val();
                 quantity = $("#quantity").val();
                 pagos = quantity / noCuotas;
-                $("#cuotas").val(pagos);                                                          
+                $("#cuota").val(pagos);                                                          
     });
     $("#firstDate").change(function(){
         var date = $("#firstDate").val();

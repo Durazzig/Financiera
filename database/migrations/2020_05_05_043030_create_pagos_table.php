@@ -13,13 +13,16 @@ class CreatePagosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pagos', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cliente');
-            $table->foreign('cliente')->references('id')->on('clientes');
-            $table->unsignedBigInteger('no_pago');
-            $table->foreign('no_pago')->references('id')->on('prestamos');
+            $table->unsignedBigInteger('client');
+            $table->foreign('client')->references('id')->on('clients');
+            $table->unsignedBigInteger('loan');
+            $table->foreign('loan')->references('id')->on('loans');
+            $table->integer('no_pago');
             $table->double('cantidad');
+            $table->date('pago_date');
+            $table->double('pago_registrado');
         });
     }
 

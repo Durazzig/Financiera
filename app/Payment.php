@@ -4,16 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Loan extends Model
+class Payment extends Model
 {
+
     protected $fillable = [
-        'id',
-        'cliente',
+        'client',
+        'loan',
+        'no_pago',
         'cantidad',
-        'no_pagos',
-        'cuota',
-        'fecha_ministracion',
-        'fecha_vencimiento',
+        'pago_date',
+        'pago_registrado',
     ];
 
     public function setUpdatedAtAttribute($value)
@@ -23,10 +23,5 @@ class Loan extends Model
     public function setCreatedAtAttribute($value)
     {
         // to Disable updated_at
-    }
-
-    public function client()
-    {
-        return $this->belongsTo('App\Client','client_id');
     }
 }

@@ -7,7 +7,9 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3 class="mb-0">Prestamos</h3>
+                        <h3 class="mb-0">
+                            <strong>Pagos</strong>
+                        </h3>
                     </div>
                     <div>
                         <a href="{{ route('loans.create') }}" class="btn btn-primary">
@@ -41,7 +43,8 @@
                             <td scope="row">{{ $loan->fecha_ministracion }}</td>
                             <td scope="row">{{ $loan->fecha_vencimiento }}</td>
                             <td>
-                            <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{$loan->id}}">Borrar</button>
+                                <a href="{{url('/payments/edit',$loan->client)}}" class="btn btn-outline-success btn-sm">Ver</a>
+                                <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{$loan->id}}">Borrar</button>
                             </td>
                         </tr>
                         @endforeach

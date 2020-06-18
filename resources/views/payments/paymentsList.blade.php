@@ -22,26 +22,26 @@
                         <tr>
                             <th scope="col">{{ __('#') }}</th>
                             <th scope="col">{{ __('Cliente') }}</th>
+                            <th scope="col">{{ __('Prestamo') }}</th>
+                            <th scope="col">{{ __('No Pago') }}</th>
                             <th scope="col">{{ __('Cantidad') }}</th>
-                            <th scope="col">{{ __('No Pagos') }}</th>
-                            <th scope="col">{{ __('Cuota') }}</th>
-                            <th scope="col">{{ __('Fecha Ministracion') }}</th>
-                            <th scope="col">{{ __('Fecha Vencimiento') }}</th>
+                            <th scope="col">{{ __('Fecha De Pago') }}</th>
+                            <th scope="col">{{ __('Pago Registrado ($)') }}</th>
                             <th scope="col" style="width: 150px">{{ __('Opciones') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($loans as $loan)
+                        @foreach ($payments as $payment)
                         <tr>
-                            <td scope="row">{{ $loan->id }}</td>
-                            <td scope="row">{{ $loan->client->name }}</td>
-                            <td scope="row">{{ $loan->cantidad }}</td>
-                            <td scope="row">{{ $loan->no_pagos }}</td>
-                            <td scope="row">{{ $loan->cuota }}</td>
-                            <td scope="row">{{ $loan->fecha_ministracion }}</td>
-                            <td scope="row">{{ $loan->fecha_vencimiento }}</td>
+                            <td scope="row">{{ $payment->id }}</td>
+                            <td scope="row">{{ $payment->client }}</td>
+                            <td scope="row">{{ $payment->loan }}</td>
+                            <td scope="row">{{ $payment->no_pago }}</td>
+                            <td scope="row">{{ $payment->cantidad }}</td>
+                            <td scope="row">{{ $payment->pago_date }}</td>
+                            <td scope="row">{{ $payment->pago_registrado }}</td>
                             <td>
-                            <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{$loan->id}}">Borrar</button>
+                            <button class="btn btn-outline-danger btn-sm btn-delete" data-id="">Borrar</button>
                             </td>
                         </tr>
                         @endforeach

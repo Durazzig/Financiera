@@ -36,3 +36,8 @@ Route::any('/clients/update/{id}', 'ClientsController@update')->name('clients.up
 //Rutas Prestamos
 Route::get('/loans', 'LoansController@index')->name('loans.index');
 Route::get('/loans/create', 'LoansController@create')->name('loans.create');
+Route::any('/loans/store', 'LoansController@store')->name('loans.store');
+
+//Rutas Pagos
+Route::get('/payments', 'PaymentController@index')->name('payments.index');
+Route::any('/payments/edit/{id}', 'PaymentController@edit');
