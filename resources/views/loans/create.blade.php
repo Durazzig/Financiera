@@ -9,6 +9,11 @@
                     <div>
                         <h3 class="mb-0">Prestamos</h3>
                     </div>
+                    <div>
+                        <a href="{{ route('clients.index') }}" class="btn btn-danger">
+                            {{ __('Regresar')}}
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -56,7 +61,7 @@
                 <input class="btn btn-success btn-block bg-dark" type="submit" value="Realizar Prestamo">
             </form>
             @else
-            <strong>Se ha detetectado que no te has logueado -> Por favor inicia sesion</strong>
+                <strong>Se ha detetectado que no te has logueado -> Por favor inicia sesion</strong>
             @endif
             </div>
         </div>

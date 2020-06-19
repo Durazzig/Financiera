@@ -17,6 +17,7 @@
                 </div>
             </div>
             <div class="card-body">
+                @if(Auth::user())
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -42,6 +43,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                @else
+                    <strong>Se ha detetectado que no te has logueado -> Por favor inicia sesion</strong>
+                @endif
             </div>
         </div>
     </div>

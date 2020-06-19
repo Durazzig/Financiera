@@ -32,6 +32,8 @@ class CreateLoansTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('prestamos');
+        Schema::enableForeignKeyConstraints();
     }
 }

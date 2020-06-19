@@ -37,7 +37,7 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -69,9 +69,29 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $payment)
+    public function update(Request $request)
     {
-        //
+        $pays = Payment::all();
+    }
+
+    public function list($id)
+    {
+        $payments = Payment::all()->where('loan_id',$id);
+        $saldo_abonado = 0;
+        $saldo_pendiente = 0;
+        $deuda = Loan::select('cantidad')->where('id',$id)->get();
+        foreach($payments as $payment)
+        {
+            $saldo_abonado += $payment->pago_registrado;
+            $saldo_pendiente = $deuda[0]->cantidad - $saldo_abonado;
+        }
+        //dd($deuda);
+        return view('payments.paymentsList',compact('payments'))->with(compact('deuda','saldo_abonado','saldo_pendiente'));
+    }
+
+    public function abonar(Request $request)
+    {
+        return view('payments.abonar');
     }
 
     /**

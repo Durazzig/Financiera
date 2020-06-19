@@ -15,10 +15,10 @@ class CreatePagosTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client');
-            $table->foreign('client')->references('id')->on('clients');
-            $table->unsignedBigInteger('loan');
-            $table->foreign('loan')->references('id')->on('loans');
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->unsignedBigInteger('loan_id');
+            $table->foreign('loan_id')->references('id')->on('loans');
             $table->integer('no_pago');
             $table->double('cantidad');
             $table->date('pago_date');
@@ -33,6 +33,8 @@ class CreatePagosTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('pagos');
+        Schema::enableForeignKeyConstraints();
     }
 }

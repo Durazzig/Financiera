@@ -11,14 +11,10 @@
                             <strong>Pagos</strong>
                         </h3>
                     </div>
-                    <div>
-                        <a href="{{ route('loans.create') }}" class="btn btn-primary">
-                            {{ __('Nuevo Prestamo')}}
-                        </a>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
+                @if(Auth::user())
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -43,13 +39,16 @@
                             <td scope="row">{{ $loan->fecha_ministracion }}</td>
                             <td scope="row">{{ $loan->fecha_vencimiento }}</td>
                             <td>
-                                <a href="{{url('/payments/edit',$loan->client)}}" class="btn btn-outline-success btn-sm">Ver</a>
+                                <a href="{{url('/payments/list',$loan->id)}}" class="btn btn-outline-success btn-sm">Ver</a>
                                 <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{$loan->id}}">Borrar</button>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                @else
+                    <strong>Se ha detetectado que no te has logueado -> Por favor inicia sesion</strong>
+                @endif
             </div>
         </div>
     </div>

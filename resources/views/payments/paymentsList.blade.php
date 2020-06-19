@@ -7,11 +7,24 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3 class="mb-0">Prestamos</h3>
+                        <strong>Saldo Abonado: ${{ $saldo_abonado }}</strong>
                     </div>
                     <div>
-                        <a href="{{ route('loans.create') }}" class="btn btn-primary">
-                            {{ __('Nuevo Prestamo')}}
+                        <strong>Saldo Pendiente: ${{ $saldo_pendiente }}</strong>
+                    </div>
+                    <div>
+                        <strong>Deuda Total: ${{ $deuda[0]->cantidad }}</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="mb-0">Pagos</h3>
+                    </div>
+                    <div>
+                        <a href="{{ route('payments.abonar') }}" class="btn btn-primary">
+                            {{ __('Abonar')}}
                         </a>
                     </div>
                 </div>
@@ -34,8 +47,8 @@
                         @foreach ($payments as $payment)
                         <tr>
                             <td scope="row">{{ $payment->id }}</td>
-                            <td scope="row">{{ $payment->client }}</td>
-                            <td scope="row">{{ $payment->loan }}</td>
+                            <td scope="row">{{ $payment->client->name }}</td>
+                            <td scope="row">{{ $payment->loan_id }}</td>
                             <td scope="row">{{ $payment->no_pago }}</td>
                             <td scope="row">{{ $payment->cantidad }}</td>
                             <td scope="row">{{ $payment->pago_date }}</td>

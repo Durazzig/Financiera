@@ -8,7 +8,7 @@ class Loan extends Model
 {
     protected $fillable = [
         'id',
-        'cliente',
+        'client_id',
         'cantidad',
         'no_pagos',
         'cuota',
@@ -28,5 +28,10 @@ class Loan extends Model
     public function client()
     {
         return $this->belongsTo('App\Client','client_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Payment');
     }
 }

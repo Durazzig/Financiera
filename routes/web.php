@@ -40,4 +40,6 @@ Route::any('/loans/store', 'LoansController@store')->name('loans.store');
 
 //Rutas Pagos
 Route::get('/payments', 'PaymentController@index')->name('payments.index');
-Route::any('/payments/edit/{id}', 'PaymentController@edit');
+Route::any('/payments/list/{id}', 'PaymentController@list');
+Route::get('/payments/abonar', 'PaymentController@abonar')->name('payments.abonar');
+Route::post('/payments/abonar/{id}', 'PaymentController@update')->name('payments.update');

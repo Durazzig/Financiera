@@ -11,12 +11,13 @@
                     </div>
                     <div>
                         <a href="{{ route('clients.index') }}" class="btn btn-danger">
-                            {{ __('Cancel')}}
+                            {{ __('Regresar')}}
                         </a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
+                @if(Auth::user())
                 <form action="{{ route('clients.store') }}" method="POST">
                     @csrf
                     <div class="form-group form-row">
@@ -54,6 +55,9 @@
                         <button type="submit" class="btn btn-success btn-lg">{{ __('Create') }}</button>
                     </div>
                 </form>
+                @else
+                    <strong>Se ha detetectado que no te has logueado -> Por favor inicia sesion</strong>
+                @endif
             </div>
         </div>
     </div>

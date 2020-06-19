@@ -56,8 +56,8 @@ class LoansController extends Controller
             if($fecha->isWeekDay())
             {
                 $payment = new Payment();
-                $payment->client = $loan->client_id;
-                $payment->loan = $loan->id;
+                $payment->client_id = $loan->client_id;
+                $payment->loan_id = $loan->id;
                 $payment->no_pago = $contador_pagos + 1;
                 $payment->cantidad = $loan->cuota;
                 $payment->pago_date = $fecha;
