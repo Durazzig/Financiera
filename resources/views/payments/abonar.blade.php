@@ -18,12 +18,28 @@
             </div>
             <div class="card-body">
                 @if(Auth::user())
-                <form action="{{ route('payments.update') }}" method="POST">
+                <form action="{{ route('payments.update',$loans->loan_id) }}" method="POST">
                     @csrf
                     <div class="form-group form-row">
                         <div class="col-md-12">
-                            <label for="name">{{ __('Cantidad a abonar:') }}</label>
-                            <input type="number" name="name" id="name" class="form-control">
+                            <label for="client">{{ __('Cliente:') }}</label>
+                            <select class="custom-select" name="client" id="client">
+                                <option value="{{$loans->client_id}}">{{$loans->client->name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-row">
+                        <div class="col-md-12">
+                            <label for="loan">{{ __('Id Prestamo:') }}</label>
+                            <select class="custom-select" name="loan" id="loan">
+                                <option value="{{$loans->loan_id}}">{{$loans->loan_id}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-row">
+                        <div class="col-md-12">
+                            <label for="quantity">{{ __('Cantidad a abonar:') }}</label>
+                            <input type="number" name="quantity" id="quantity" class="form-control" selected>
                         </div>
                     </div>
                     <div class="form-group">

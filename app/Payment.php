@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
 
+    public $timestamps = false;
+
     protected $fillable = [
         'client_id',
         'loan_id',

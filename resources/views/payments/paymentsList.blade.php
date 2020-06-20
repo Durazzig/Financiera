@@ -22,11 +22,6 @@
                     <div>
                         <h3 class="mb-0">Pagos</h3>
                     </div>
-                    <div>
-                        <a href="{{ route('payments.abonar') }}" class="btn btn-primary">
-                            {{ __('Abonar')}}
-                        </a>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -52,9 +47,12 @@
                             <td scope="row">{{ $payment->no_pago }}</td>
                             <td scope="row">{{ $payment->cantidad }}</td>
                             <td scope="row">{{ $payment->pago_date }}</td>
-                            <td scope="row">{{ $payment->pago_registrado }}</td>
+                            <td scope="row">${{ $payment->pago_registrado }}</td>
                             <td>
-                            <button class="btn btn-outline-danger btn-sm btn-delete" data-id="">Borrar</button>
+                                <a href="{{ route('payments.abonar',$payment->loan_id) }}" class="btn btn-sm btn-primary">
+                                    {{ __('Abonar')}}
+                                </a>
+                                <button class="btn btn-outline-danger btn-sm btn-delete" data-id="">Borrar</button>
                             </td>
                         </tr>
                         @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Payment;
 use App\Loan;
+use App\Client;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -69,9 +70,63 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $pays = Payment::all();
+        $payments = Payment::all()->where('loan_id',$id);
+        $pago = $request->input('quantity');
+        $aux = $request->input('quantity');
+        foreach($payments as $payment)
+        {
+            //Cuando pago justo lo que pide la cuota
+            if($payment->pago_registrado == 0)
+            {
+                if($pago == ($payment->cantidad))
+                {
+                    $payment->pago_registrado = $pago;
+                    $payment->save();
+                    $pago = 0;
+                }
+                //Cuando pago mas de lo que pide la cuota
+                elseif($pago > $payment->cantidad)
+                {
+                    $pago = $payment->cantidad;
+                    $payment->pago_registrado = $pago;
+                    $payment->save();
+                    $pago = $aux - $payment->cantidad;
+                    $aux = $aux - $payment->cantidad;
+                }
+                elseif($pago < $payment->cantidad)
+                {
+                    $payment->pago_registrado = $pago;
+                    $payment->save();
+                    $pago = 0;
+                }
+            }
+            elseif(($payment->pago_registrado > 0) && ($payment->pago_registrado < $payment->cantidad))
+            {
+                if($pago < $payment->cantidad)
+                {
+                    $subcantidad = $payment->cantidad - $payment->pago_registrado;
+                    $pago = $pago - $subcantidad;
+                    $payment->pago_registrado = $payment->cantidad;
+                    $payment->save();
+                }
+                elseif($pago > $payment->cantidad)
+                {
+
+                }
+            }
+        }
+        $saldo_abonado = 0;
+        $saldo_pendiente = 0;
+        $deuda = Loan::select('cantidad')->where('id',$id)->get();
+        foreach($payments as $payment)
+        {
+            $saldo_abonado += $payment->pago_registrado;
+            $saldo_pendiente = $deuda[0]->cantidad - $saldo_abonado;
+        }
+        //dd($loans->id);
+        return view('payments.paymentsList',compact('payments'))->with(compact('deuda','saldo_abonado','saldo_pendiente'));
     }
 
     public function list($id)
@@ -85,13 +140,15 @@ class PaymentController extends Controller
             $saldo_abonado += $payment->pago_registrado;
             $saldo_pendiente = $deuda[0]->cantidad - $saldo_abonado;
         }
-        //dd($deuda);
         return view('payments.paymentsList',compact('payments'))->with(compact('deuda','saldo_abonado','saldo_pendiente'));
     }
 
-    public function abonar(Request $request)
+    public function abonar($id)
     {
-        return view('payments.abonar');
+        //dd($id);
+        $loans = Payment::all()->where('loan_id',$id)->first();
+        //dd($loans->id);
+        return view('payments.abonar',compact('loans'));
     }
 
     /**
