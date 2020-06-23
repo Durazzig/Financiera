@@ -22,6 +22,7 @@ class CreateLoansTable extends Migration
             $table->date('fecha_ministracion');
             $table->date('fecha_vencimiento');
             $table->foreign('client_id')->references('id')->on('clients');
+            $table->timestamps();
         });
     }
 

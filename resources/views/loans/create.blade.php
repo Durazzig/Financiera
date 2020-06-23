@@ -71,12 +71,12 @@
 <script>
     var noCuotas;
     var quantity;
-    var pagos;
+    var pago;
     $('#payments').change(function(){
-                noCuotas = $(this).val();
-                quantity = $("#quantity").val();
-                pagos = quantity / noCuotas;
-                $("#cuota").val(pagos);                                                          
+        noCuotas = $(this).val();
+        var date = $("#firstDate").val();
+        var realDate = moment(date, 'YYYY-MM-DD').businessAdd(noCuotas)._d
+        $("#lastDate").val(moment(realDate).format("YYYY-MM-DD"));
     });
     $("#firstDate").change(function(){
         var date = $("#firstDate").val();

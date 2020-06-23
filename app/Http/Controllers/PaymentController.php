@@ -106,15 +106,22 @@ class PaymentController extends Controller
             {
                 if($pago < $payment->cantidad)
                 {
+                    $payment->pago_registrado += $pago;
+                    $pago = 0;
+                    $payment->save();
+                }
+                else
+                {
                     $subcantidad = $payment->cantidad - $payment->pago_registrado;
                     $pago = $pago - $subcantidad;
                     $payment->pago_registrado = $payment->cantidad;
                     $payment->save();
                 }
-                elseif($pago > $payment->cantidad)
-                {
-
-                }
+            }
+            if($payment->pago_registrado == $payment->cantidad)
+            {
+                $payment->pagado = true;
+                $payment->save();
             }
         }
         $saldo_abonado = 0;

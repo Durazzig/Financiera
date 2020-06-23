@@ -39,3 +39,7 @@ Route::get('/payments', 'PaymentController@index')->name('payments.index');
 Route::any('/payments/list/{id}', 'PaymentController@list');
 Route::get('/payments/abonar/{id}', 'PaymentController@abonar')->name('payments.abonar');
 Route::post('/payments/abonar/{id}', 'PaymentController@update')->name('payments.update');
+
+Route::get('/users/edit', 'UserController@edit')->name('users.edit');
+Route::post('/users/edit-user', 'UserController@update')->name('users.update');
+Route::post('/users/edit-pasword', 'UserController@update_pass')->name('users.update_pass');

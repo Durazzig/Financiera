@@ -62,6 +62,7 @@ class LoansController extends Controller
                 $payment->cantidad = $loan->cuota;
                 $payment->pago_date = $fecha;
                 $payment->pago_registrado = 0;
+                $payment->pagado = 0;
                 $payment->save();
                 $contador_pagos++;
             }

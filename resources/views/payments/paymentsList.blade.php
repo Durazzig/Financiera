@@ -35,6 +35,8 @@
                             <th scope="col">{{ __('Cantidad') }}</th>
                             <th scope="col">{{ __('Fecha De Pago') }}</th>
                             <th scope="col">{{ __('Pago Registrado ($)') }}</th>
+                            <th scope="col">{{ __('Actualizacion de pago') }}</th>
+                            <th scope="col">{{ __('Pagado') }}</th>
                             <th scope="col" style="width: 150px">{{ __('Opciones') }}</th>
                         </tr>
                     </thead>
@@ -48,11 +50,12 @@
                             <td scope="row">{{ $payment->cantidad }}</td>
                             <td scope="row">{{ $payment->pago_date }}</td>
                             <td scope="row">${{ $payment->pago_registrado }}</td>
+                            <td scope="row">{{ $payment->updated_at }}</td>
+                            <td scope="row">{{ $payment->pagado }}</td>
                             <td>
                                 <a href="{{ route('payments.abonar',$payment->loan_id) }}" class="btn btn-sm btn-primary">
                                     {{ __('Abonar')}}
                                 </a>
-                                <button class="btn btn-outline-danger btn-sm btn-delete" data-id="">Borrar</button>
                             </td>
                         </tr>
                         @endforeach
@@ -62,44 +65,5 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('bottom-js')
-<script>
-    $('body').on('click', '.btn-delete', function(event) {
-        const id = $(this).data('id');
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: 'No podrás revertir esta acción',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, borralo!'
-        })
-        .then((result) => {
-            if (result.value) {
-                axios.delete('{{ route('clients.index') }}/' + id)
-                    .then(result => {
-                        Swal.fire({
-                            title: 'Borrado',
-                            text: 'El cliente a sido borrado',
-                            icon: 'success'
-                        }).then(() => {
-                            window.location.href='{{ route('clients.index') }}';
-                        });
-                    })
-                    .catch(error => {
-                        Swal.fire(
-                            'Ocurrió un error',
-                            'El cliente no ha podido borrarse.',
-                            'error'
-                        );
-                    });
-
-            }
-        });
-    });
-</script>
 @endsection
 

@@ -72,14 +72,14 @@
         })
         .then((result) => {
             if (result.value) {
-                axios.delete('{{ route('clients.index') }}/' + id)
+                axios.delete('{{ route('loans.index') }}/' + id)
                     .then(result => {
                         Swal.fire({
                             title: 'Borrado',
                             text: 'El cliente a sido borrado',
                             icon: 'success'
                         }).then(() => {
-                            window.location.href='{{ route('clients.index') }}';
+                            window.location.href='{{ route('loans.index') }}';
                         });
                     })
                     .catch(error => {

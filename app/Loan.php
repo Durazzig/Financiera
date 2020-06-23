@@ -16,14 +16,6 @@ class Loan extends Model
         'fecha_vencimiento',
     ];
 
-    public function setUpdatedAtAttribute($value)
-    {
-        // to Disable updated_at
-    }
-    public function setCreatedAtAttribute($value)
-    {
-        // to Disable updated_at
-    }
 
     public function client()
     {

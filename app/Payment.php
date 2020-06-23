@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
 
-    public $timestamps = false;
-
     protected $fillable = [
         'client_id',
         'loan_id',
@@ -16,16 +14,9 @@ class Payment extends Model
         'cantidad',
         'pago_date',
         'pago_registrado',
+        'pagado',
     ];
 
-    public function setUpdatedAtAttribute($value)
-    {
-        // to Disable updated_at
-    }
-    public function setCreatedAtAttribute($value)
-    {
-        // to Disable updated_at
-    }
 
     public function loan()
     {

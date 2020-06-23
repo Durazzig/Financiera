@@ -23,6 +23,8 @@ class CreatePagosTable extends Migration
             $table->double('cantidad');
             $table->date('pago_date');
             $table->double('pago_registrado');
+            $table->boolean('pagado');
+            $table->timestamps();
         });
     }
 
