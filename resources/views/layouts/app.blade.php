@@ -34,13 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('clients.index')}}">{{_('Clientes')}}</a>
+                            <a class="nav-link" href="{{route('clients.index')}}">Clientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('loans.index')}}">{{_('Prestamos')}}</a>
+                            <a class="nav-link" href="{{route('loans.index')}}">Prestamos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('payments.index')}}">{{_('Pagos')}}</a>
+                            <a class="nav-link" href="{{route('payments.index')}}">Pagos</a>
                         </li>
                     </ul>
 

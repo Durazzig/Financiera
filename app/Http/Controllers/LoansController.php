@@ -7,6 +7,8 @@ use App\Loan;
 use App\Client;
 use App\Payment;
 use Carbon\Carbon;
+use App\Exports\ExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LoansController extends Controller
 {
@@ -30,6 +32,11 @@ class LoansController extends Controller
     {
         $clientsData = Client::all();
         return view('loans.create',compact('clientsData'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new ExportExcel, 'resumen-pagos.xlsx');
     }
 
     /**
@@ -114,6 +121,10 @@ class LoansController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $loan = Loan::find($id);
+
+        $loan->delete();
+
+        return $loan;
     }
 }

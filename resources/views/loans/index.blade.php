@@ -76,7 +76,7 @@
                     .then(result => {
                         Swal.fire({
                             title: 'Borrado',
-                            text: 'El cliente a sido borrado',
+                            text: 'El prestamo a sido borrado',
                             icon: 'success'
                         }).then(() => {
                             window.location.href='{{ route('loans.index') }}';
@@ -85,7 +85,7 @@
                     .catch(error => {
                         Swal.fire(
                             'Ocurrió un error',
-                            'El cliente no ha podido borrarse.',
+                            'El prestamo no ha podido borrarse, aun tiene prestamos pendientes.',
                             'error'
                         );
                     });

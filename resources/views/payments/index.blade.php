@@ -40,7 +40,6 @@
                             <td scope="row">{{ $loan->fecha_vencimiento }}</td>
                             <td>
                                 <a href="{{url('/payments/list',$loan->id)}}" class="btn btn-outline-success btn-sm">Ver</a>
-                                <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{$loan->id}}">Borrar</button>
                             </td>
                         </tr>
                         @endforeach
@@ -53,44 +52,5 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('bottom-js')
-<script>
-    $('body').on('click', '.btn-delete', function(event) {
-        const id = $(this).data('id');
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: 'No podrás revertir esta acción',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, borralo!'
-        })
-        .then((result) => {
-            if (result.value) {
-                axios.delete('{{ route('clients.index') }}/' + id)
-                    .then(result => {
-                        Swal.fire({
-                            title: 'Borrado',
-                            text: 'El cliente a sido borrado',
-                            icon: 'success'
-                        }).then(() => {
-                            window.location.href='{{ route('clients.index') }}';
-                        });
-                    })
-                    .catch(error => {
-                        Swal.fire(
-                            'Ocurrió un error',
-                            'El cliente no ha podido borrarse.',
-                            'error'
-                        );
-                    });
-
-            }
-        });
-    });
-</script>
 @endsection
 

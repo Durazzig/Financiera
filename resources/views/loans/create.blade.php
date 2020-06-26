@@ -74,9 +74,9 @@
     var pago;
     $('#payments').change(function(){
         noCuotas = $(this).val();
-        var date = $("#firstDate").val();
-        var realDate = moment(date, 'YYYY-MM-DD').businessAdd(noCuotas)._d
-        $("#lastDate").val(moment(realDate).format("YYYY-MM-DD"));
+        cantidad = $('#quantity').val();
+        pago = cantidad / noCuotas;
+        $('#cuota').val(pago);
     });
     $("#firstDate").change(function(){
         var date = $("#firstDate").val();

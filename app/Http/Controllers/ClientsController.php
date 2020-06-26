@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Client;
+use App\Imports\ImportExcel;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientsController extends Controller
 {
@@ -51,6 +54,18 @@ class ClientsController extends Controller
         ]);
 
         return redirect()->route('clients.index');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required'
+        ]);
+        
+        $file = $request->file('file');
+        Excel::import(new ImportExcel, $file);
+        
+        return back()->with('message','Usuarios Importados');
     }
 
     /**

@@ -28,11 +28,14 @@ Route::post('/clients', 'ClientsController@store')->name('clients.store');
 Route::delete('/clients/{id}', 'ClientsController@destroy')->name('clients.destroy');
 Route::any('/clients/edit/{id}', 'ClientsController@edit');
 Route::any('/clients/update/{id}', 'ClientsController@update')->name('clients.update');
+Route::any('/clients/import}', 'ClientsController@import')->name('clients.import');
 
 //Rutas Prestamos
 Route::get('/loans', 'LoansController@index')->name('loans.index');
 Route::get('/loans/create', 'LoansController@create')->name('loans.create');
 Route::any('/loans/store', 'LoansController@store')->name('loans.store');
+Route::delete('/loans/{id}', 'LoansController@destroy')->name('loans.destroy');
+Route::get('/loans/export', 'LoansController@export')->name('loans.export');
 
 //Rutas Pagos
 Route::get('/payments', 'PaymentController@index')->name('payments.index');

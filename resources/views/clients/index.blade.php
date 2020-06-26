@@ -9,6 +9,21 @@
                     <div>
                         <h3 class="mb-0">Clientes</h3>
                     </div>
+                    <form action="{{route('clients.import')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @if(Session::has('message'))
+                            <p>{{Session::get('message')}}</p>
+                            @endif
+                            <input type="file" name="file" id="file" class="form-control @error('file') is-invalid @enderror">
+                            @error('file')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                            <div>
+                                <button class="btn btn-success">Importar</button>
+                            </div>
+                    </form>
                     <div>
                         <a href="{{ route('clients.create') }}" class="btn btn-primary">
                             {{ __('Nuevo Cliente')}}
@@ -84,7 +99,6 @@
                             'error'
                         );
                     });
-
             }
         });
     });
