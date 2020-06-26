@@ -14,14 +14,18 @@
                             @if(Session::has('message'))
                             <p>{{Session::get('message')}}</p>
                             @endif
-                            <input type="file" name="file" id="file" class="form-control @error('file') is-invalid @enderror">
-                            @error('file')
-                                <div class="invalid-feedback">
-                                    {{$message}}
+                            <div class="row">
+                                <div class="col">
+                                    <input type="file" name="file" id="file" class="form-control @error('file') is-invalid @enderror">
                                 </div>
-                            @enderror
-                            <div>
-                                <button class="btn btn-success">Importar</button>
+                                @error('file')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                                <div class="col">
+                                    <button class="btn btn-success">Importar</button>
+                                </div>
                             </div>
                     </form>
                     <div>

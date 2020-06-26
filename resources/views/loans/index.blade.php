@@ -10,6 +10,11 @@
                         <h3 class="mb-0">Prestamos</h3>
                     </div>
                     <div>
+                        <a href="{{ route('loans.export') }}" class="btn btn-primary">
+                            {{ __('Exportar Prestamos')}}
+                        </a>
+                    </div>
+                    <div>
                         <a href="{{ route('loans.create') }}" class="btn btn-primary">
                             {{ __('Nuevo Prestamo')}}
                         </a>
