@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Inicio</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,12 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">Clientes Registrados:</h5>
+                          <p class="card-text display-3 text-center">{{ $clients }}</p>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
